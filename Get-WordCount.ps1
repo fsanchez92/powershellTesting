@@ -2,7 +2,7 @@
     param([System.IO.FileInfo]$Path)
 
 $texto = Get-Content $Path
-$texto = $texto.Split("'' ,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+$texto = $texto.Split("'' .,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
 $Dictionary = @{}
 
 ForEach ($palabra in $texto)
