@@ -1,8 +1,10 @@
-﻿$texto = Get-Content C:\Users\fsanchez\Desktop\Parametric\hola.txt
-$Dictionary = @{}
-$texto = $texto.Split("'' ,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+﻿function Get-WordCount { 
+    param([System.IO.FileInfo]$Path)
 
-function Get-WordCount { 
+$texto = Get-Content $Path
+$texto = $texto.Split("'' ,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+$Dictionary = @{}
+
 ForEach ($palabra in $texto)
     {
         If ($Dictionary.ContainsKey($palabra)) 
