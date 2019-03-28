@@ -1,6 +1,10 @@
 ﻿function Get-WordCount { 
-    param([System.IO.FileInfo]$Path)
+[CmdletBinding()]    
+param(
+[Parameter(ValueFromPipeline=$True)]
+$Path)
 
+Process{
 $texto = Get-Content $Path
 $texto = $texto.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
 $Dictionary = @{}
@@ -14,7 +18,4 @@ ForEach ($palabra in $texto)
     }    
 $Dictionary.GetEnumerator() | Sort -Descending
 }
-
-$path = Read-Host -Prompt "Please, enter the path"
-
-Get-WordCount $path
+}
