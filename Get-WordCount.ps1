@@ -2,20 +2,42 @@
 [CmdletBinding()]    
 param(
 [Parameter(ValueFromPipeline=$True)]
-$Path)
+$inputArray,
+[parameter(ValueFromPipeline=$True)]
+        [string]$String
+)
 
 Process{
-$texto = Get-Content $Path
-$texto = $texto.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+
 $Dictionary = @{}
 
-ForEach ($palabra in $texto)
+ForEach ($elementoDeArray in $inputArray)
     {
-        If ($Dictionary.ContainsKey($palabra)) 
-                {$Dictionary.$palabra++}
+    if([System.IO.File]::Exists($elementoDeArray))
+    {
+        $texto = Get-Content $elementoDeArray
+        $texto = $texto.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+        ForEach ($palabradetexto in $texto)
+         {
+        If ($Dictionary.ContainsKey($palabradetexto)) 
+                {$Dictionary.$palabradetexto++}
            else 
-                {$Dictionary.Add($palabra, 1)}                
-    }    
+                {$Dictionary.Add($palabradetexto, 1)}                
+         }
+    }
+    else
+        {
+        $texto = $elementoDeArray.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+        ForEach ($palabradetexto in $texto)
+            {
+                If ($Dictionary.ContainsKey($palabradetexto)) 
+                        {$Dictionary.$palabradetexto++}
+                   else 
+                        {$Dictionary.Add($palabradetexto, 1)}                
+            } 
+    }
+               
+    }        
 $Dictionary.GetEnumerator() | Sort -Descending
-}
+    }
 }
