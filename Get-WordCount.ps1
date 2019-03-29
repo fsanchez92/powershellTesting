@@ -20,7 +20,7 @@ ForEach ($arrayElement in $inputArray)
     }
     else
         {
-        Get-ArrayElement $text $Dictionary       
+        Get-ArrayElement $arrayElement $Dictionary       
     }
                
     }        
