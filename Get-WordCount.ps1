@@ -11,33 +11,33 @@ Process{
 
 $Dictionary = @{}
 
-ForEach ($elementoDeArray in $inputArray)
+ForEach ($arrayElement in $inputArray)
     {
-    if([System.IO.File]::Exists($elementoDeArray))
+    if([System.IO.File]::Exists($arrayElement))
     {
-        $texto = Get-Content $elementoDeArray
-        $texto = $texto.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
-        ForEach ($palabradetexto in $texto)
+        $text = Get-Content $arrayElement
+        $text = $text.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+        ForEach ($word in $text)
          {
-        If ($Dictionary.ContainsKey($palabradetexto)) 
-                {$Dictionary.$palabradetexto++}
+        If ($Dictionary.ContainsKey($word)) 
+                {$Dictionary.$word++}
            else 
-                {$Dictionary.Add($palabradetexto, 1)}                
+                {$Dictionary.Add($word, 1)}                
          }
     }
     else
         {
-        $texto = $elementoDeArray.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
-        ForEach ($palabradetexto in $texto)
+        $text = $arrayElement.Split("'' .-_,123456789()\/&%?!", [System.StringSplitOptions]::RemoveEmptyEntries)
+        ForEach ($word in $text)
             {
-                If ($Dictionary.ContainsKey($palabradetexto)) 
-                        {$Dictionary.$palabradetexto++}
+                If ($Dictionary.ContainsKey($word)) 
+                        {$Dictionary.$word++}
                    else 
-                        {$Dictionary.Add($palabradetexto, 1)}                
+                        {$Dictionary.Add($word, 1)}                
             } 
     }
                
     }        
-$Dictionary.GetEnumerator() | Sort -Descending
+$Dictionary.GetEnumerator() | Sort Name
     }
 }
