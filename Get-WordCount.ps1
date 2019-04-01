@@ -9,7 +9,7 @@ $inputArray,
 
 Begin {
 
-$Dictionary = @{}
+$Dictionary = [Collections.Generic.SortedDictionary[string,int]]::new()
 
 }
 
