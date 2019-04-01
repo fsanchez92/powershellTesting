@@ -7,9 +7,14 @@ $inputArray,
         [string]$String
 )
 
-Process{
+Begin {
 
 $Dictionary = @{}
+
+}
+
+
+Process{
 
 ForEach ($arrayElement in $inputArray)
     {
@@ -24,8 +29,14 @@ ForEach ($arrayElement in $inputArray)
     }
                
     }        
-$Dictionary.GetEnumerator() | Sort Name
+#$Dictionary.GetEnumerator() | Sort Name
     }
+
+End {
+
+return $Dictionary
+
+}
 }
 
 function Get-ArrayElement ($text, $Dictionary){
